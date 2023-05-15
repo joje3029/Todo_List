@@ -53,6 +53,56 @@ public class Main {
 			System.out.printf("	%d	|	%s	\n", dowork.id, dowork.work);
 			}
 		
+		}else if(cmd.startsWith("todo modifey ")){	
+			String[] cmdBits = cmd.split(" ");
+			int Id = Integer.parseInt(cmdBits[2]);
+		
+			doWork foundWork = null;
+			
+			for(int i = 0; i < doWorkes.size(); i++) {
+				doWork dowork = doWorkes.get(i);	
+			
+				if(dowork.id == Id) {
+					foundWork = dowork;
+					break;
+				}
+			}
+			
+			if(foundWork == null) {
+				System.out.printf("%d번 할 일은 존재하지 않습니다\n",Id);
+			}
+			System.out.printf("수정할 할 일 : ");
+			String work = sc.nextLine();
+			
+			foundWork.work = work;
+			
+			System.out.printf("%d번 할 일이 수정되었습니다.\n", Id);
+			
+		}else if(cmd.startsWith("todo delete ")){	
+			String[] cmdBits = cmd.split(" ");
+			int Id = Integer.parseInt(cmdBits[2]);
+			
+			doWork foundWork = null;
+			
+			for(int i = 0; i < doWorkes.size(); i++) {
+				doWork dowork = doWorkes.get(i);	
+			
+				if(dowork.id == Id) {
+					foundWork = dowork;
+					break;
+				}
+			}
+			
+			if(foundWork == null) {
+				System.out.printf("%d번 할 일은 존재하지 않습니다\n",Id);
+			}
+
+			doWorkes.remove(foundWork);
+			
+			System.out.printf("%d번 할 일이 삭제되었습니다.\n", Id);
+			
+	
+			
 		}else {
 			System.out.println("존재하지 않는 명령어 입니다.");
 			continue;
@@ -66,9 +116,9 @@ public class Main {
 	private static void TestData() {
 		System.out.println("테스트를 위한 데이터를 생성합니다");
 
-		doWorkes.add(new doWork(1 , "1번 글"));
-		doWorkes.add(new doWork(2 , "2번 글"));	
-		doWorkes.add(new doWork(3 , "3번 글"));
+		doWorkes.add(new doWork(1 , "1번 할 일"));
+		doWorkes.add(new doWork(2 , "2번 할 일"));	
+		doWorkes.add(new doWork(3 , "3번 할 일"));
 	}
 	
 	
@@ -85,8 +135,7 @@ class doWork{
 
 	
 }
-//현 상태 문제. wirte를 했는데 arraylist에 저장이 안되는지 list를 하면 무조건 할일이 없다고 뜸.
-//저장해서 수정할것.-> arraylist를 while문 안에 넣었었으니 매번 초기화 된거잖아.
-
-//이제 수정하는 기능 만들고. 삭제랑. 체크 기능 만들기(todo 된것만 list 나오게-> 수정할때 V넣고 V있는것만 list하면 나오게 하기)
-
+// 체크 기능 만들기(todo 된것만 list 나오게-> 수정할때 V넣고 V있는것만 list하면 나오게 하기)
+// v 체크 표시를 어디다가 해야할까. 번호? 할일? 번호쪽이 더 나은듯. 
+//그럼 v한것만 list 나오게?
+//아니면 v란을 만들어서 한건 v하게 하는 기능을 만들까. 어느쪽이 나은지 고민해야겠네.
